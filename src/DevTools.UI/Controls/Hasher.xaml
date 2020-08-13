@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="DevTools.UI.Controls.Hasher"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:DevTools.UI.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--<StackPanel Grid.Row="0" Margin="12">
+            
+        </StackPanel>-->
+
+        <DockPanel Grid.Column="0" Grid.Row="1" Margin="12">
+            <TextBlock DockPanel.Dock="Top" >Source:</TextBlock>
+            <TextBox x:Name="input" TextChanged="input_TextChanged" DockPanel.Dock="Top" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
+        </DockPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Margin="12">
+
+            <TextBlock>Hashing algorithm:</TextBlock>
+            <ComboBox SelectionChanged="cmbHashAlgorithm_SelectionChanged" x:Name="cmbHashAlgorithm">
+                <ComboBoxItem IsSelected="True">SHA-1</ComboBoxItem>
+                <ComboBoxItem>SHA-2 (512)</ComboBoxItem>
+            </ComboBox>
+
+            <StackPanel Height="8" />
+
+            <TextBlock>Hashed output:</TextBlock>
+            <TextBox x:Name="hashedOutput" DockPanel.Dock="Top" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
+        </StackPanel>
+    </Grid>
+</UserControl>
