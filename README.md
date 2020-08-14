@@ -1,6 +1,6 @@
 # DevTools Desktop App
 
-A privacy-focused, Windows desktop app with tools to aid development workflows. No more Googling 'RGB to Hex' and finding every search result loads megabytes of advertisements, trackers, JavaScript nusiances, and bloated UI. DevTools is a native, open source app that loads no external content and never phones home.
+A privacy-focused, Windows desktop app with tools to aid development workflows. No more Googling 'RGB to Hex' and finding every search result loads megabytes of advertisements, trackers, and other JavaScript nuisances. DevTools is a native, open source app that loads zero external content and never phones home.
 
 Features:
 * JsonPath tester

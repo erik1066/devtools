@@ -7,40 +7,85 @@
              xmlns:local="clr-namespace:DevTools.UI.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Margin="12">
+    <Grid Margin="12">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         
-        <StackPanel>
-            <TextBlock>Red:</TextBlock>
-            <TextBox x:Name="rgbRed" FontFamily="Consolas" TextChanged="rgbRed_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
+        <StackPanel Grid.Column="0">
+
+            <TextBlock FontSize="16" Text="RGB to Hex Converter" />
+
+            <StackPanel Height="16"/>
+
+            <StackPanel>
+                <TextBlock>Red:</TextBlock>
+                <TextBox x:Name="rgbRed" FontFamily="Consolas" TextChanged="rgbRed_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock>Green:</TextBlock>
+                <TextBox x:Name="rgbGreen" FontFamily="Consolas" TextChanged="rgbGreen_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock>Blue:</TextBlock>
+                <TextBox x:Name="rgbBlue" FontFamily="Consolas" TextChanged="rgbBlue_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Height="32"></StackPanel>
+
+            <StackPanel>
+                <TextBlock>Hex:</TextBlock>
+                <TextBox x:Name="hex" FontFamily="Consolas" IsReadOnly="True" Width="128" HorizontalAlignment="Left" FontSize="24" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Height="32"></StackPanel>
+
+            <StackPanel>
+                <TextBlock>Hex (with hash):</TextBlock>
+                <TextBox x:Name="hexWithHash" FontFamily="Consolas" IsReadOnly="True" Width="128" HorizontalAlignment="Left" FontSize="24" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Height="32"></StackPanel>
+
+            <Border x:Name="colorSwatch" Width="128" Height="128" HorizontalAlignment="Left"></Border>
+
         </StackPanel>
 
-        <StackPanel>
-            <TextBlock>Green:</TextBlock>
-            <TextBox x:Name="rgbGreen" FontFamily="Consolas" TextChanged="rgbGreen_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
+        <StackPanel Grid.Column="1">
+
+            <TextBlock FontSize="16" Text="Hex to RGB Converter" />
+
+            <StackPanel Height="16"/>
+
+            <StackPanel>
+                <TextBlock>Hex:</TextBlock>
+                <TextBox x:Name="hexInput" TextChanged="hexInput_TextChanged" FontFamily="Consolas" Width="168" HorizontalAlignment="Left" FontSize="24" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Height="32" />
+
+            <StackPanel>
+                <TextBlock>Red:</TextBlock>
+                <TextBox x:Name="rgbRedOutput" FontFamily="Consolas" IsReadOnly="True" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock>Green:</TextBlock>
+                <TextBox x:Name="rgbGreenOutput" FontFamily="Consolas" IsReadOnly="True" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock>Blue:</TextBlock>
+                <TextBox x:Name="rgbBlueOutput" FontFamily="Consolas" IsReadOnly="True" Width="96" HorizontalAlignment="Left" ></TextBox>
+            </StackPanel>
+
+            <StackPanel Height="32"></StackPanel>
+
+            <Border x:Name="colorSwatchHex" Width="128" Height="128" HorizontalAlignment="Left"></Border>
+
         </StackPanel>
-
-        <StackPanel>
-            <TextBlock>Blue:</TextBlock>
-            <TextBox x:Name="rgbBlue" FontFamily="Consolas" TextChanged="rgbBlue_TextChanged" Width="96" HorizontalAlignment="Left" ></TextBox>
-        </StackPanel>
-
-        <StackPanel Height="32"></StackPanel>
-
-        <StackPanel>
-            <TextBlock>Hex:</TextBlock>
-            <TextBox x:Name="hex" FontFamily="Consolas" IsReadOnly="True" Width="128" HorizontalAlignment="Left" FontSize="24" ></TextBox>
-        </StackPanel>
-
-        <StackPanel Height="32"></StackPanel>
-
-        <StackPanel>
-            <TextBlock>Hex (with hash):</TextBlock>
-            <TextBox x:Name="hexWithHash" FontFamily="Consolas" IsReadOnly="True" Width="128" HorizontalAlignment="Left" FontSize="24" ></TextBox>
-        </StackPanel>
-
-        <StackPanel Height="32"></StackPanel>
-
-        <Border x:Name="colorSwatch" Width="128" Height="128" HorizontalAlignment="Left"></Border>
-
-    </StackPanel>
+    </Grid>
 </UserControl>

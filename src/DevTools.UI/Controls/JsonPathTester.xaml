@@ -26,12 +26,12 @@
 
         <DockPanel Grid.Column="0" Grid.Row="1" Margin="12">
             <TextBlock DockPanel.Dock="Top" >Json source:</TextBlock>
-            <TextBox x:Name="jsonPathSourceDocument" TextChanged="jsonPathSourceDocument_TextChanged" DockPanel.Dock="Top" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
+            <TextBox x:Name="jsonPathSourceDocument" TextChanged="jsonPathSourceDocument_TextChanged" DockPanel.Dock="Top" TextWrapping="NoWrap" AcceptsReturn="True" AcceptsTab="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
         </DockPanel>
 
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="12">
             <TextBlock DockPanel.Dock="Top" >Json result:</TextBlock>
-            <TextBox x:Name="jsonPathOutput" DockPanel.Dock="Top" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
+            <TextBox x:Name="jsonPathOutput" DockPanel.Dock="Top" IsReadOnly="True" TextWrapping="NoWrap" AcceptsReturn="True" AcceptsTab="True" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
         </DockPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="12, 0, 12, 12">

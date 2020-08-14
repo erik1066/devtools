@@ -25,12 +25,12 @@
         </StackPanel>
 
         <DockPanel Grid.Column="0" Grid.Row="1" Margin="12">
-            <TextBlock DockPanel.Dock="Top" >Json source:</TextBlock>
+            <TextBlock DockPanel.Dock="Top" >Content:</TextBlock>
             <TextBox x:Name="sourceText" TextChanged="sourceText_TextChanged" DockPanel.Dock="Top" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
         </DockPanel>
 
         <DockPanel Grid.Column="1" Grid.Row="1" Margin="12">
-            <TextBlock DockPanel.Dock="Top" >Json result:</TextBlock>
+            <TextBlock DockPanel.Dock="Top" >Result:</TextBlock>
             <TextBox x:Name="output" DockPanel.Dock="Top" IsReadOnly="True" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Visible" FontFamily="Consolas"></TextBox>
         </DockPanel>
     </Grid>

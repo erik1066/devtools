@@ -34,11 +34,13 @@ namespace DevTools.UI.Controls
                 }
                 else
                 {
+                    colorSwatch.Background = new SolidColorBrush(Colors.Transparent);
                     return string.Empty;
                 }
             }
             else
             {
+                colorSwatch.Background = new SolidColorBrush(Colors.Transparent);
                 return string.Empty;
             }
         }
@@ -57,6 +59,49 @@ namespace DevTools.UI.Controls
         {
             hex.Text = DoRgbConversion(rgbRed.Text, rgbGreen.Text, rgbBlue.Text);
             hexWithHash.Text = "#" + hex.Text;
+        }
+
+        private void hexInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            (string red, string green, string blue) = DoHexConversion(hexInput.Text);
+            rgbRedOutput.Text = red;
+            rgbGreenOutput.Text = green;
+            rgbBlueOutput.Text = blue;
+        }
+
+        (string red, string green, string blue) DoHexConversion(string hex)
+        {
+            
+            try
+            {
+                hex = hex.Trim().Trim('#');
+                if (hex.Length == 6)
+                {
+                    int redValue = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                    int greenValue = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                    int blueValue = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+                    colorSwatchHex.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
+                    return (redValue.ToString(), greenValue.ToString(), blueValue.ToString());
+                }
+                else if (hex.Length == 3)
+                {
+                    int redValue = int.Parse(hex.Substring(0, 1) + hex.Substring(0, 1), System.Globalization.NumberStyles.HexNumber);
+                    int greenValue = int.Parse(hex.Substring(1, 1) + hex.Substring(1, 1), System.Globalization.NumberStyles.HexNumber);
+                    int blueValue = int.Parse(hex.Substring(2, 1) + hex.Substring(2, 1), System.Globalization.NumberStyles.HexNumber);
+                    colorSwatchHex.Background = new SolidColorBrush(Color.FromRgb((byte)redValue, (byte)greenValue, (byte)blueValue));
+                    return (redValue.ToString(), greenValue.ToString(), blueValue.ToString());
+                }
+                else
+                {
+                    colorSwatchHex.Background = new SolidColorBrush(Colors.Transparent);
+                    return (string.Empty, string.Empty, string.Empty);
+                }
+            }
+            catch
+            {
+                colorSwatchHex.Background = new SolidColorBrush(Colors.Transparent);
+                return (string.Empty, string.Empty, string.Empty);
+            }
         }
     }
 }

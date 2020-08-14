@@ -37,9 +37,16 @@ namespace DevTools.UI.Controls
             try
             {
                 JToken token = sourceJson.SelectToken(jsonPath);
-                string jsonResult = token.ToString();
+                if (token != null)
+                {
+                    string jsonResult = token.ToString();
 
-                jsonPathOutput.Text = jsonResult;
+                    jsonPathOutput.Text = jsonResult;
+                }
+                else
+                {
+                    jsonPathOutput.Text = string.Empty;
+                }
             }
             catch (Exception)
             {
