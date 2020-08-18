@@ -37,13 +37,20 @@ namespace DevTools.UI.Controls
 
         private void input_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtAction.Text.StartsWith("Plain"))
+            try
             {
-                output.Text = Base64Encode(input.Text);
+                if (txtAction.Text.StartsWith("Plain"))
+                {
+                    output.Text = Base64Encode(input.Text);
+                }
+                else
+                {
+                    output.Text = Base64Decode(input.Text);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                output.Text = Base64Decode(input.Text);
+                output.Text = $"{ex.GetType().ToString()} : {ex.Message}";
             }
         }
 
