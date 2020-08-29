@@ -1,0 +1,58 @@
+﻿@page "/regextester"
+@using System.Text.RegularExpressions
+@using DevTools.WebUI.Models
+
+<EditForm Model="@regexModel" OnValidSubmit="@DoRegexTest">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="regex">
+            Regular expression:
+        </label>
+        <InputText id="regex" style="font-family: Consolas, monospace" class="form-control" @bind-Value="regexModel.RegularExpression" />
+    </div>
+
+    <div style="height: 1em;"></div>
+    <button type="submit" class="btn btn-primary mb-2">Test regular expression</button>
+    <div style="height: 1em;"></div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="input">
+                    Input:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="input" class="form-control" rows="15" @bind-Value="regexModel.Input" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="output">
+                    Output:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="regexModel.Output" />
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    RegularExpressionModel regexModel = new RegularExpressionModel();
+
+    private void DoRegexTest()
+    {
+        try
+        {
+            var rx = new Regex(regexModel.RegularExpression, RegexOptions.Compiled);
+            var match = rx.Match(regexModel.Input);
+
+            regexModel.Output = match.Value;
+        }
+        catch
+        {
+            regexModel.Output = string.Empty;
+        }
+    }
+}
