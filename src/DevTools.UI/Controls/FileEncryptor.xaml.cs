@@ -19,8 +19,10 @@ namespace DevTools.UI.Controls
         private void InputFilePathSelectButton_Click(object sender, RoutedEventArgs e)
         {
             if (ViewModel.IsProcessing) return;
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.CheckFileExists = true;
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                CheckFileExists = true
+            };
 
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();

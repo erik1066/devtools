@@ -9,7 +9,8 @@
         ui:ThemeManager.IsThemeAware="True"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
-        Title="DevTools" Height="750" Width="800">
+        Title="DevTools" Height="650" Width="730">
+    <!--Height="516" Width="730"-->
     <Window.DataContext>
         <local:DevToolsViewModel />
     </Window.DataContext>
