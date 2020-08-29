@@ -1,19 +1,26 @@
-# DevTools Desktop App
+# DevTools
 
-A privacy-focused, Windows desktop app with tools to aid software development workflows. No more Googling 'RGB to Hex' and finding every search result loads megabytes of advertisements, trackers, and other JavaScript nuisances. 
+**A privacy-focused set of tools that provides commonly-needed features for software developers.**
 
-DevTools is a native, open source app that loads zero external content and never phones home.
+Tired of searching for 'RGB to Hex', GUID generators, and other stuff you need in your day-to-day,
+    only to find every result loads megabytes of advertisements, trackers, and other JavaScript nuisances?
+    DevTools is a way to avoid that mess and get your work done with peace of mind. No spying, tracking, malvertisements,
+    or other garbage. DevTools loads no external content and never phones home.
 
-Features:
-* JsonPath tester
-* Regular expression tester
-* RGB to Hex converter
-* Base64 encoder and decoder
-* SHA-1 and SHA-2 (512) hasher
-* File encrytor/decryptor
-* GUID/UUID generator
+DevTools can run as a native Windows 10 application or as a web application. A feature comparison across platforms is shown below:
 
-## Screenshots
+| Feature                    | Desktop       | Web   |
+|:-------------------------- |:------------- |:----- |
+| JsonPath tester            | Yes           | No    |
+| Regular expression tester  | Yes           | No    |
+| RGB to Hex converter       | Yes           | No    |
+| Base64 encoder/decoder     | Yes           | No    |
+| Hasher                     | Yes           | Yes   |
+| File encryption/decryption | Yes           | No    |
+| GUID/UUID generator        | Yes           | Yes   |
+
+
+## Screenshots (Native app)
 
 ### Json path tester:
 ![Json Path tester](/images/image01.png)
