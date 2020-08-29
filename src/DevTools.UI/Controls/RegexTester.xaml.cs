@@ -26,10 +26,17 @@ namespace DevTools.UI.Controls
 
         private void DoRegexTest()
         {
-            var rx = new Regex(regularExpression.Text, RegexOptions.Compiled);
-            var match = rx.Match(sourceText.Text);
+            try
+            {
+                var rx = new Regex(regularExpression.Text, RegexOptions.Compiled);
+                var match = rx.Match(sourceText.Text);
 
-            output.Text = match.Value;
+                output.Text = match.Value;
+            }
+            catch
+            {
+                output.Text = string.Empty;
+            }
         }
 
         private void regularExpression_TextChanged(object sender, TextChangedEventArgs e)
