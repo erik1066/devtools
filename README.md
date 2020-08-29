@@ -20,7 +20,16 @@ DevTools can run as a native Windows 10 application or as a web application. A f
 | GUID/UUID generator        | Yes           | Yes   |
 
 
+## Screenshots (Web app)
+
+The web version of DevTools is built in Blazor and uses Bootstrap.
+
+### GUID/UUID generator:
+![GUID/UUID generator](/images/web-image-07.png)
+
 ## Screenshots (Native app)
+
+The Windows 10 desktop version of DevTools is built in WPF and uses [ModernWpfUI](https://github.com/Kinnara/ModernWpf).
 
 ### Json path tester:
 ![Json Path tester](/images/image01.png)
