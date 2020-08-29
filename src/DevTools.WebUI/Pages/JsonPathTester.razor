@@ -1,0 +1,85 @@
+﻿@page "/jsonpathtester"
+@using DevTools.WebUI.Models
+@using Newtonsoft.Json.Linq
+
+
+<EditForm Model="@jsonPathModel" OnValidSubmit="@DoPathTest">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="jsonpath">
+            JsonPath expression:
+        </label>
+        <InputText id="jsonpath" style="font-family: Consolas, monospace" class="form-control" @bind-Value="jsonPathModel.JsonPath" />
+    </div>
+
+    <div style="height: 1em;"></div>
+    <button type="submit" class="btn btn-primary mb-2">Encode / decode</button>
+    <div style="height: 1em;"></div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="input">
+                    Input:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="input" class="form-control" rows="15" @bind-Value="jsonPathModel.Input" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="output">
+                    Output:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="jsonPathModel.Output" />
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    JsonPathModel jsonPathModel = new JsonPathModel();
+
+    private void DoPathTest()
+    {
+        string payload = jsonPathModel.Input;
+        string jsonPath = jsonPathModel.JsonPath;
+
+        if (string.IsNullOrEmpty(payload)) return;
+        if (string.IsNullOrEmpty(jsonPath)) return;
+
+        JObject sourceJson = null;
+
+        try
+        {
+            sourceJson = JObject.Parse(payload);
+        }
+        catch
+        {
+            jsonPathModel.Output = "Invalid Json source input";
+            return;
+        }
+
+        try
+        {
+            JToken token = sourceJson.SelectToken(jsonPath);
+            if (token != null)
+            {
+                string jsonResult = token.ToString();
+
+                jsonPathModel.Output = jsonResult;
+            }
+            else
+            {
+                jsonPathModel.Output = string.Empty;
+            }
+        }
+        catch (Exception)
+        {
+            jsonPathModel.Output = string.Empty;
+        }
+    }
+}
