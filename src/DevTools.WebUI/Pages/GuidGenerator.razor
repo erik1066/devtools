@@ -1,0 +1,106 @@
+﻿@page "/guidgenerator"
+@using DevTools.WebUI.Models
+
+<EditForm Model="@guidGeneratorModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="numberToGenerate">
+            Number of GUIDs/UUIDs to generate:
+        </label>
+        <InputNumber id="numberToGenerate" class="form-control" @bind-Value="guidGeneratorModel.NumberToGenerate" />
+        <small id="numberToGenerateHelp" class="form-text text-muted">Max 50,000</small>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-auto">
+            <div class="form-check">
+                <InputCheckbox id="uppercase" @bind-Value=guidGeneratorModel.Uppercase />
+                <label for="uppercase">Uppercase</label>
+            </div>
+
+            <div class="form-check">
+                <InputCheckbox id="braces" @bind-Value=guidGeneratorModel.Braces />
+                <label for="braces">Braces</label>
+            </div>
+
+            <div class="form-check">
+                <InputCheckbox id="hyphens" @bind-Value=guidGeneratorModel.Hyphens />
+                <label for="hyphens">Hyphens</label>
+            </div>
+        </div>
+
+        <div class="col-md-auto">
+            <div class="form-check">
+                <InputCheckbox id="base64encode" @bind-Value=guidGeneratorModel.Base64Encode />
+                <label for="base64encode">Base64 encode</label>
+            </div>
+
+            <div class="form-check">
+                <InputCheckbox id="rfc7515" @bind-Value=guidGeneratorModel.Rfc7515 />
+                <label for="rfc7515">RFC 7515</label>
+            </div>
+
+            <div class="form-check">
+                <InputCheckbox id="urlencode" @bind-Value=guidGeneratorModel.Urlencode />
+                <label for="urlencode">URL encode</label>
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 10px"></div>
+
+    <button type="submit" class="btn btn-primary mb-2">Generate GUIDs/UUIDs</button>
+
+    @*<div class="progress">
+            <div class="progress-bar" style="width: @progress%" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>*@
+
+    <div style="height: 10px"></div>
+
+    <div class="form-group">
+        <label for="results">
+            Results:
+        </label>
+        <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="output" />
+    </div>
+</EditForm>
+
+
+
+@code {
+    private GuidGeneratorModel guidGeneratorModel = new GuidGeneratorModel();
+
+    private string output = string.Empty;
+    private double progress = 25.0;
+
+    private async Task HandleValidSubmit()
+    {
+        await Task.Run(
+                () =>
+                {
+                    progress = 0.0;
+                    output = DevTools.Common.GenerateGuids(
+                        numberToGenerate: guidGeneratorModel.NumberToGenerate,
+                        uppercase: guidGeneratorModel.Uppercase,
+                        braces: guidGeneratorModel.Braces,
+                        hyphens: guidGeneratorModel.Hyphens,
+                        base64encode: guidGeneratorModel.Base64Encode,
+                        rfc7515: guidGeneratorModel.Rfc7515,
+                        urlencode: guidGeneratorModel.Urlencode,
+                        updateProgress: UpdateProgress
+                        );
+
+                    progress = 0.0;
+                    StateHasChanged();
+                });
+    }
+
+    private void UpdateProgress(double progress1)
+    {
+        progress = progress1;
+        StateHasChanged();
+    }
+}

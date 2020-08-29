@@ -1,13 +1,31 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DevTools.UI
+namespace DevTools
 {
     public static class Common
     {
+        public static string SHA1Hash(string input)
+        {
+            var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Concat(hash.Select(b => b.ToString("x2")));
+        }
+
+        public static string SHA512Hash(string input)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(input);
+            using (var alg = SHA512.Create())
+            {
+                alg.ComputeHash(data);
+                return BitConverter.ToString(alg.Hash);
+            }
+        }
+
         public static string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
@@ -226,5 +244,57 @@ namespace DevTools.UI
 
         [System.Runtime.InteropServices.DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
         public static extern bool ZeroMemory(IntPtr Destination, int Length);
+
+        public static string GenerateGuids(int numberToGenerate, bool uppercase, bool braces, bool hyphens, bool base64encode, bool rfc7515, bool urlencode, Action<double> updateProgress = null)
+        {
+            double progress = 0.0;
+
+            StringBuilder sb = new StringBuilder(numberToGenerate * 38);
+
+            for (int i = 0; i < numberToGenerate; i++)
+            {
+                string guid = System.Guid.NewGuid().ToString();
+
+                if (uppercase)
+                {
+                    guid = guid.ToUpper();
+                }
+                if (!hyphens)
+                {
+                    guid = guid.Replace("-", string.Empty);
+                }
+                if (braces)
+                {
+                    guid = "{" + guid + "}";
+                }
+                if (base64encode)
+                {
+                    guid = Common.Base64Encode(guid);
+                }
+                if (base64encode && rfc7515)
+                {
+                    guid = guid.Split('=')[0]; // Remove any trailing '='s
+                    guid = guid.Replace('+', '-'); // 62nd char of encoding
+                    guid = guid.Replace('/', '_'); // 63rd char of encoding
+                }
+                if (urlencode)
+                {
+                    guid = WebUtility.UrlEncode(guid);
+                }
+
+                sb.Append(guid);
+                sb.Append(Environment.NewLine);
+
+                progress = ((double)i / (double)numberToGenerate) * 100.0;
+                updateProgress?.Invoke(progress);
+            }
+
+            string result = sb.ToString();
+
+            progress = 0.0;
+            updateProgress?.Invoke(progress);
+
+            return result;
+        }
     }
 }

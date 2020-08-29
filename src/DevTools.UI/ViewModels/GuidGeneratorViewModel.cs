@@ -151,49 +151,26 @@ namespace DevTools.UI
             Task.Factory.StartNew(
                 () =>
                 {
-                    for (int i = 0; i < maxGuids; i++)
-                    {
-                        string guid = System.Guid.NewGuid().ToString();
+                    Output = DevTools.Common.GenerateGuids(
+                        numberToGenerate: maxGuids, 
+                        uppercase: Uppercase, 
+                        braces: Braces, 
+                        hyphens: Hyphens, 
+                        base64encode: Base64Encode, 
+                        rfc7515: Rfc7515, 
+                        urlencode: Urlencode, 
+                        updateProgress: UpdateProgress);
 
-                        if (Uppercase)
-                        {
-                            guid = guid.ToUpper();
-                        }
-                        if (!Hyphens)
-                        {
-                            guid = guid.Replace("-", string.Empty);
-                        }
-                        if (Braces)
-                        {
-                            guid = "{" + guid + "}";
-                        }
-                        if (Base64Encode)
-                        {
-                            guid = Common.Base64Encode(guid);
-                        }
-                        if (Base64Encode && Rfc7515)
-                        {
-                            guid = guid.Split('=')[0]; // Remove any trailing '='s
-                            guid = guid.Replace('+', '-'); // 62nd char of encoding
-                            guid = guid.Replace('/', '_'); // 63rd char of encoding
-                        }
-                        if (Urlencode)
-                        {
-                            guid = WebUtility.UrlEncode(guid);
-                        }
-
-                        sb.Append(guid);
-                        sb.Append(Environment.NewLine);
-
-                        Progress = ((double)i / (double)maxGuids) * 100.0;
-                    }
-
-                    Output = sb.ToString();
                     IsProcessing = false;
                     Progress = 0.0;
                 });
         }
         private bool CanExecuteGenerateCommand() => true;
         #endregion // Commands
+
+        private void UpdateProgress(double progress)
+        {
+            Progress = progress;
+        }
     }
 }

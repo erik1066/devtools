@@ -40,28 +40,12 @@ namespace DevTools.UI.Controls
                 switch (algorithm)
                 {
                     case "SHA-1":
-                        hashedOutput.Text = SHA1Hash(input.Text);
+                        hashedOutput.Text = Common.SHA1Hash(input.Text);
                         break;
                     case "SHA-2 (512)":
-                        hashedOutput.Text = SHA512Hash(input.Text);
+                        hashedOutput.Text = Common.SHA512Hash(input.Text);
                         break;
                 }
-            }
-        }
-
-        static string SHA1Hash(string input)
-        {
-            var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input));
-            return string.Concat(hash.Select(b => b.ToString("x2")));
-        }
-
-        static string SHA512Hash(string input)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(input);
-            using (var alg = SHA512.Create())
-            {
-                alg.ComputeHash(data);
-                return BitConverter.ToString(alg.Hash);
             }
         }
 

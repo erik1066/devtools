@@ -1,0 +1,64 @@
+﻿@page "/hasher"
+@using DevTools.WebUI.Models
+
+
+<EditForm Model="@hasherModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="input">
+                    Input:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="input" class="form-control" rows="25" @bind-Value="hasherModel.Input" />
+            </div>
+        </div>
+
+        <div class="col">
+
+            <div class="form-group">
+                <label for="hashfunction">Hash function:</label>
+                <InputSelect @bind-Value="hasherModel.HashFunction" class="form-control" id="hashfunction">
+                    <option value="SHA1">SHA-1</option>
+                    <option value="SHA2-512">SHA-2 (512)</option>
+                </InputSelect>
+            </div>
+
+            <div style="height: 1em;"></div>
+            <button type="submit" class="btn btn-primary mb-2">Generate Hash</button>
+            <div style="height: 1em;"></div>
+
+            <div class="form-group">
+                <label for="output">
+                    Output:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="10" @bind-Value="hasherModel.Output" />
+            </div>
+        </div>
+    </div>
+
+    
+
+</EditForm>
+
+@code {
+    private HasherModel hasherModel = new HasherModel();
+
+    private void HandleValidSubmit()
+    {
+        switch (hasherModel.HashFunction)
+        {
+            case "SHA1":
+                hasherModel.Output = Common.SHA1Hash(hasherModel.Input);
+                break;
+            case "SHA2-512":
+                hasherModel.Output = Common.SHA512Hash(hasherModel.Input);
+                break;
+            default:
+                hasherModel.Output = string.Empty;
+                break;
+        }
+    }
+}
