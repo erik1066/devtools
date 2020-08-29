@@ -1,18 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace DevTools.UI
 {
@@ -34,6 +20,8 @@ namespace DevTools.UI
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
             hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
         }
 
         private void rgbConverter_Selected(object sender, RoutedEventArgs e)
@@ -44,6 +32,8 @@ namespace DevTools.UI
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
             hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
         }
 
         private void base64converter_Selected(object sender, RoutedEventArgs e)
@@ -54,6 +44,8 @@ namespace DevTools.UI
             base64ConverterView.Visibility = Visibility.Visible;
             regexTesterView.Visibility = Visibility.Collapsed;
             hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
         }
 
         private void regexTester_Selected(object sender, RoutedEventArgs e)
@@ -64,6 +56,8 @@ namespace DevTools.UI
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Visible;
             hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
         }
 
         private void hasher_Selected(object sender, RoutedEventArgs e)
@@ -74,6 +68,32 @@ namespace DevTools.UI
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
             hasherView.Visibility = Visibility.Visible;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
+        }
+
+        private void fileEncryptor_Selected(object sender, RoutedEventArgs e)
+        {
+            if (jsonPathTesterView == null) return;
+            jsonPathTesterView.Visibility = Visibility.Collapsed;
+            rgbConverterView.Visibility = Visibility.Collapsed;
+            base64ConverterView.Visibility = Visibility.Collapsed;
+            regexTesterView.Visibility = Visibility.Collapsed;
+            hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Visible;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
+        }
+
+        private void guidGenerator_Selected(object sender, RoutedEventArgs e)
+        {
+            if (jsonPathTesterView == null) return;
+            jsonPathTesterView.Visibility = Visibility.Collapsed;
+            rgbConverterView.Visibility = Visibility.Collapsed;
+            base64ConverterView.Visibility = Visibility.Collapsed;
+            regexTesterView.Visibility = Visibility.Collapsed;
+            hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Visible;
         }
     }
 }

@@ -4,39 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.modernwpf.com/2019"
-        xmlns:local="clr-namespace:DevTools.UI.Controls"
+        xmlns:local="clr-namespace:DevTools.UI"
+        xmlns:controls="clr-namespace:DevTools.UI.Controls"
         ui:ThemeManager.IsThemeAware="True"
         ui:WindowHelper.UseModernWindowStyle="True"
         mc:Ignorable="d"
         Title="DevTools" Height="750" Width="800">
+    <Window.DataContext>
+        <local:DevToolsViewModel />
+    </Window.DataContext>
     <Grid x:Name="LayoutRoot"
-          Background="#212121">
+          Background="#1A1D21">
         
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Padding="12" Grid.Column="0" BorderBrush="#3C3C3C" BorderThickness="0, 0, 1, 0">
-            
+        <Border Padding="0" Grid.Column="0" Background="#19171D" BorderBrush="#2C3030" BorderThickness="0, 0, 1, 0">
+
             <StackPanel>
-                <ListBox Background="#212121">
-                    <ListBoxItem x:Name="jsonPath" IsSelected="True" Selected="jsonPath_Selected">JsonPath Tester</ListBoxItem>
-                    <ListBoxItem x:Name="regexTester" Selected="regexTester_Selected">Regular Expression Tester</ListBoxItem>
-                    <ListBoxItem x:Name="rgbConverter" Selected="rgbConverter_Selected">RGB to Hex converter</ListBoxItem>
-                    <ListBoxItem x:Name="base64converter" Selected="base64converter_Selected" >Base64 Converter</ListBoxItem>
-                    <ListBoxItem x:Name="hasher" Selected="hasher_Selected" >Hasher</ListBoxItem>
+                <ListBox Foreground="#D1D2D3" Background="#19171D">
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="jsonPath" IsSelected="True" Selected="jsonPath_Selected">JsonPath Tester</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="regexTester" Selected="regexTester_Selected">Regular Expression Tester</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="rgbConverter" Selected="rgbConverter_Selected">RGB to Hex converter</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="base64converter" Selected="base64converter_Selected" >Base64 Converter</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="hasher" Selected="hasher_Selected" >Hasher</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="fileEncryptor" Selected="fileEncryptor_Selected" >File Encryptor</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="guidEncryptor" Selected="guidGenerator_Selected" >GUID/UUID Generator</ListBoxItem>
                 </ListBox>
             </StackPanel>
         </Border>
 
         <Border Grid.Column="1" Margin="12">
             <Grid>
-                <local:JsonPathTester x:Name="jsonPathTesterView" />
-                <local:RgbToHexConverter x:Name="rgbConverterView" Visibility="Collapsed" />
-                <local:Base64Converter x:Name="base64ConverterView" Visibility="Collapsed" />
-                <local:RegexTester x:Name="regexTesterView" Visibility="Collapsed" />
-                <local:Hasher x:Name="hasherView" Visibility="Collapsed" />
+                <controls:JsonPathTester x:Name="jsonPathTesterView" />
+                <controls:RgbToHexConverter x:Name="rgbConverterView" Visibility="Collapsed" />
+                <controls:Base64Converter x:Name="base64ConverterView" Visibility="Collapsed" />
+                <controls:RegexTester x:Name="regexTesterView" Visibility="Collapsed" />
+                <controls:Hasher x:Name="hasherView" Visibility="Collapsed" />
+                <controls:FileEncryptor x:Name="fileEncryptorView" Visibility="Collapsed" DataContext="{Binding FileEncryptorViewModel}" />
+                <controls:GuidGenerator x:Name="guidGeneratorView" Visibility="Collapsed" DataContext="{Binding GuidGeneratorViewModel}" />
             </Grid>
         </Border>
         

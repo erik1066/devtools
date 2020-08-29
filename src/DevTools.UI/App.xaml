@@ -6,10 +6,14 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+
+            <local:BooleanInverter x:Key="BooleanInverter" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemeResources />
                 <ui:XamlControlsResources />
-                <ui:ThemeResources RequestedTheme="Dark" AccentColor="#ff1744" />
+                <ui:ThemeResources RequestedTheme="Dark" AccentColor="#2F93E0" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
