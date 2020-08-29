@@ -1,6 +1,84 @@
 ﻿@page "/base64encoder"
 @using DevTools.WebUI.Models
 
-@code {
+<EditForm Model="@base64EncodingModel" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
+    <div class="form-check">
+        <input class="form-check-input"
+               @onchange="SelectionChanged"
+               type="radio" name="directionality" id="direction_encode" value="Encode" checked>
+        <label class="form-check-label" for="direction_encode">
+            Encode plaintext to base 64
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" 
+               @onchange="SelectionChanged"
+               type="radio" name="directionality" id="direction_decode" value="Decode">
+        <label class="form-check-label" for="direction_decode">
+            Decode base 64 to plaintext
+        </label>
+    </div>
+
+    <div style="height: 1em;"></div>
+    <button type="submit" class="btn btn-primary mb-2">Encode / decode</button>
+    <div style="height: 1em;"></div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="input">
+                    Input:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="input" class="form-control" rows="15" @bind-Value="base64EncodingModel.Input" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="output">
+                    Output:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="base64EncodingModel.Output" />
+            </div>
+        </div>
+    </div>
+
+    @*<div style="height: 10px"></div>
+
+        <button type="submit" class="btn btn-primary mb-2">Encode</button>
+
+        <div style="height: 10px"></div>
+
+        <div class="form-group">
+            <label for="results">
+                Results:
+            </label>
+            <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="base64EncodingModel.Output" />
+        </div>*@
+</EditForm>
+
+@code {
+    private Base64EncodingModel base64EncodingModel = new Base64EncodingModel();
+
+    private string mode = "Encode";
+
+    private void HandleValidSubmit()
+    {
+        if (mode == "Encode")
+        {
+            base64EncodingModel.Output = Common.Base64Encode(base64EncodingModel.Input);
+        }
+        else if (mode == "Decode")
+        {
+            base64EncodingModel.Output = Common.Base64Decode(base64EncodingModel.Input);
+        }
+    }
+
+    void SelectionChanged(ChangeEventArgs args)
+    {
+        mode = args.Value.ToString();
+    }
 }

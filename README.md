@@ -14,7 +14,7 @@ DevTools can run as a native Windows 10 application or as a web application. A f
 | JsonPath tester            | Yes           | No    |
 | Regular expression tester  | Yes           | No    |
 | RGB to Hex converter       | Yes           | No    |
-| Base64 encoder/decoder     | Yes           | No    |
+| Base64 encoder/decoder     | Yes           | Yes    |
 | Hasher                     | Yes           | Yes   |
 | File encryption/decryption | Yes           | No    |
 | GUID/UUID generator        | Yes           | Yes   |
