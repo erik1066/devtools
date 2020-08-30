@@ -11,6 +11,25 @@ namespace DevTools
 {
     public static class Common
     {
+        public static string ConvertRgbToHex(string rStr, string gStr, string bStr)
+        {
+            if (int.TryParse(rStr, out int r) && int.TryParse(gStr, out int g) && int.TryParse(bStr, out int b))
+            {
+                if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255)
+                {
+                    return r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         public static string JsonPathTest(string document, string jsonPathExpression)
         {
             if (string.IsNullOrEmpty(document)) return "Json document is empty";

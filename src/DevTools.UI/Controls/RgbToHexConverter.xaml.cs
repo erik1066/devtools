@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace DevTools.UI.Controls
 {
@@ -25,18 +26,12 @@ namespace DevTools.UI.Controls
 
         private string DoRgbConversion(string rStr, string gStr, string bStr)
         {
-            if (int.TryParse(rStr, out int r) && int.TryParse(gStr, out int g) && int.TryParse(bStr, out int b))
+            string hex = Common.ConvertRgbToHex(rStr, gStr, bStr);
+
+            if (!string.IsNullOrEmpty(hex))
             {
-                if (r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255)
-                {
-                    colorSwatch.Background = new SolidColorBrush(Color.FromRgb((byte)r, (byte)g, (byte)b));
-                    return r.ToString("X2") + g.ToString("X2") + b.ToString("X2");
-                }
-                else
-                {
-                    colorSwatch.Background = new SolidColorBrush(Colors.Transparent);
-                    return string.Empty;
-                }
+                colorSwatch.Background = new SolidColorBrush(Color.FromRgb(byte.Parse(rStr), byte.Parse(gStr), byte.Parse(bStr)));
+                return hex;
             }
             else
             {
@@ -71,7 +66,6 @@ namespace DevTools.UI.Controls
 
         (string red, string green, string blue) DoHexConversion(string hex)
         {
-            
             try
             {
                 hex = hex.Trim().Trim('#');
