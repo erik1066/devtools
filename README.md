@@ -1,6 +1,6 @@
 # DevTools
 
-**A privacy-focused set of tools that provides commonly-needed features for software developers.**
+**A privacy-focused set of tools for software developers.**
 
 Tired of searching for 'RGB to Hex', GUID generators, and other stuff you need in your day-to-day,
     only to find every result loads megabytes of advertisements, trackers, and other JavaScript nuisances?
