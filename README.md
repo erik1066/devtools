@@ -24,8 +24,11 @@ DevTools can run as a native Windows 10 application or as a web application. A f
 
 The web version of DevTools is built in Blazor and uses Bootstrap.
 
+### Text hasher:
+![Hasher page in the DevTools web app](/images/web-image-05.png)
+
 ### GUID/UUID generator:
-![GUID/UUID generator](/images/web-image-07.png)
+![GUID/UUID generator in the DevTools web app](/images/web-image-07.png)
 
 ## Screenshots (Native app)
 
