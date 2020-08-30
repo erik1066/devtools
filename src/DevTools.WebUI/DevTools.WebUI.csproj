@@ -12,14 +12,12 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\favicon-01.ico" />
+  <!--<ItemGroup>
     <Content Remove="wwwroot\favicon.ico" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <None Include="wwwroot\favicon.ico" />
-    <None Include="wwwroot\favicon-01.ico" />
   </ItemGroup>
 
   <ItemGroup>
