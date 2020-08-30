@@ -45,41 +45,12 @@
 
     private void DoPathTest()
     {
-        string payload = jsonPathModel.Input;
+        string jsonDocument = jsonPathModel.Input;
         string jsonPath = jsonPathModel.JsonPath;
 
-        if (string.IsNullOrEmpty(payload)) return;
+        if (string.IsNullOrEmpty(jsonDocument)) return;
         if (string.IsNullOrEmpty(jsonPath)) return;
 
-        JObject sourceJson = null;
-
-        try
-        {
-            sourceJson = JObject.Parse(payload);
-        }
-        catch
-        {
-            jsonPathModel.Output = "Invalid Json source input";
-            return;
-        }
-
-        try
-        {
-            JToken token = sourceJson.SelectToken(jsonPath);
-            if (token != null)
-            {
-                string jsonResult = token.ToString();
-
-                jsonPathModel.Output = jsonResult;
-            }
-            else
-            {
-                jsonPathModel.Output = string.Empty;
-            }
-        }
-        catch (Exception)
-        {
-            jsonPathModel.Output = string.Empty;
-        }
+        jsonPathModel.Output = Common.JsonPathTest(jsonDocument, jsonPath);
     }
 }

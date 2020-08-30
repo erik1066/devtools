@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,42 @@ namespace DevTools
 {
     public static class Common
     {
+        public static string JsonPathTest(string document, string jsonPathExpression)
+        {
+            if (string.IsNullOrEmpty(document)) return "Json document is empty";
+            if (string.IsNullOrEmpty(jsonPathExpression)) return "JsonPath expression is empty";
+
+            JObject sourceJson = null;
+
+            try
+            {
+                sourceJson = JObject.Parse(document);
+            }
+            catch (Exception ex)
+            {
+                return "Error parsing Json document: " + ex.Message;
+            }
+
+            try
+            {
+                JToken token = sourceJson.SelectToken(jsonPathExpression);
+                if (token != null)
+                {
+                    string jsonResult = token.ToString();
+
+                    return jsonResult;
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
         public static string SHA1Hash(string input)
         {
             var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input));

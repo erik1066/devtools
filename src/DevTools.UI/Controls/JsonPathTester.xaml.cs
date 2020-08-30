@@ -1,16 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DevTools.UI.Controls
 {
@@ -26,32 +15,13 @@ namespace DevTools.UI.Controls
 
         private void DoPathTest()
         {
-            string payload = jsonPathSourceDocument.Text;
+            string jsonDocument = jsonPathSourceDocument.Text;
             string jsonPath = jsonPathExpression.Text;
 
-            if (string.IsNullOrEmpty(payload)) return;
+            if (string.IsNullOrEmpty(jsonDocument)) return;
             if (string.IsNullOrEmpty(jsonPath)) return;
 
-            JObject sourceJson = JObject.Parse(payload);
-
-            try
-            {
-                JToken token = sourceJson.SelectToken(jsonPath);
-                if (token != null)
-                {
-                    string jsonResult = token.ToString();
-
-                    jsonPathOutput.Text = jsonResult;
-                }
-                else
-                {
-                    jsonPathOutput.Text = string.Empty;
-                }
-            }
-            catch (Exception)
-            {
-                jsonPathOutput.Text = string.Empty;
-            }
+            jsonPathOutput.Text = Common.JsonPathTest(jsonDocument, jsonPath);
         }
 
         private void jsonPathExpression_TextChanged(object sender, TextChangedEventArgs e)
