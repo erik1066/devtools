@@ -42,9 +42,11 @@ namespace DevTools.UI.Controls
         private void OutputFilePathSelectButton_Click(object sender, RoutedEventArgs e)
         {
             if (ViewModel.IsProcessing) return;
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.CheckFileExists = false;
-            dlg.CreatePrompt = true;
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog
+            {
+                CheckFileExists = false,
+                CreatePrompt = true
+            };
 
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();

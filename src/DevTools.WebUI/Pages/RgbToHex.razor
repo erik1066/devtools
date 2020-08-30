@@ -1,6 +1,164 @@
 ﻿@page "/rgbtohex"
 @using DevTools.WebUI.Models
 
-@code {
+<div class="row">
+    <div class="col">
+        <h1 style="font-size: 1.5em">RGB to Hex Converter</h1>
+        <EditForm Model="@rgbConverterModel" OnValidSubmit="@HandleValidRgbSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
 
+            <div class="form-group">
+                <label for="inputRed">
+                    Red:
+                </label>
+                <InputNumber id="inputRed" class="form-control" @bind-Value="rgbConverterModel.R" />
+            </div>
+
+
+            <div class="form-group">
+                <label for="inputGreen">
+                    Green:
+                </label>
+                <InputNumber id="inputGreen" class="form-control" @bind-Value="rgbConverterModel.G" />
+            </div>
+
+            <div class="form-group">
+                <label for="inputBlue">
+                    Blue:
+                </label>
+                <InputNumber id="inputBlue" class="form-control" @bind-Value="rgbConverterModel.B" />
+            </div>
+
+            <div style="height: 10px"></div>
+
+            <button type="submit" class="btn btn-primary mb-2">Convert to Hex</button>
+
+            <div style="height: 10px"></div>
+
+            <div class="form-group">
+                <label for="hex">
+                    Hex:
+                </label>
+                <InputText style="font-family: Consolas, monospace" readonly id="hex" class="form-control" @bind-Value="hexOutput" />
+            </div>
+
+            <div style="height: 10px"></div>
+
+            <div style="width: 16em; height: 16em; background-color: @hexBackground">
+
+            </div>
+
+        </EditForm>
+    </div>
+
+    <div class="col">
+        <h1 style="font-size: 1.5em">Hex to RGB Converter</h1>
+        <EditForm Model="@hexConverterModel" OnValidSubmit="@HandleValidHexSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="inputHex">
+                    Hex:
+                </label>
+                <InputText id="inputHex" class="form-control" @bind-Value="hexConverterModel.Hex" />
+            </div>
+
+            <div style="height: 10px"></div>
+
+            <button type="submit" class="btn btn-primary mb-2">Convert to Rgb</button>
+
+            <div style="height: 10px"></div>
+
+            <div class="form-group">
+                <label for="hex">
+                    RGB:
+                </label>
+                <InputText style="font-family: Consolas, monospace" readonly id="rgb" class="form-control" @bind-Value="rgbOutput" />
+            </div>
+
+            <div class="form-group">
+                <label for="hex">
+                    RGB in CSS format:
+                </label>
+                <InputText style="font-family: Consolas, monospace" readonly id="rgb" class="form-control" @bind-Value="rgbCssOutput" />
+            </div>
+
+            <div style="height: 10px"></div>
+
+            <div style="width: 16em; height: 16em; background-color: @rgbBackground">
+
+            </div>
+
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    HexConverterModel hexConverterModel = new HexConverterModel();
+    RgbConverterModel rgbConverterModel = new RgbConverterModel();
+
+    string hexOutput = string.Empty;
+    string rgbOutput = string.Empty;
+    string rgbCssOutput = string.Empty;
+
+    string hexBackground = @"transparent";
+    string rgbBackground = @"transparent";
+
+    private void HandleValidRgbSubmit()
+    {
+        hexOutput = "#" + Common.ConvertRgbToHex(rgbConverterModel.R.ToString(), rgbConverterModel.G.ToString(), rgbConverterModel.B.ToString()).TrimStart('#');
+
+        if (string.IsNullOrEmpty(hexOutput))
+        {
+            hexBackground = "transparent";
+        }
+        else
+        {
+            hexBackground = hexOutput;
+        }
+    }
+
+    private void HandleValidHexSubmit()
+    {
+        int redValue = 0;
+        int greenValue = 0;
+        int blueValue = 0;
+
+        try
+        {
+            string hex = hexConverterModel.Hex.Trim().Trim('#');
+            if (hex.Length == 6)
+            {
+                redValue = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                greenValue = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                blueValue = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+            }
+            else if (hex.Length == 3)
+            {
+                redValue = int.Parse(hex.Substring(0, 1) + hex.Substring(0, 1), System.Globalization.NumberStyles.HexNumber);
+                greenValue = int.Parse(hex.Substring(1, 1) + hex.Substring(1, 1), System.Globalization.NumberStyles.HexNumber);
+                blueValue = int.Parse(hex.Substring(2, 1) + hex.Substring(2, 1), System.Globalization.NumberStyles.HexNumber);
+            }
+            else
+            {
+                rgbOutput = string.Empty;
+                rgbCssOutput = string.Empty;
+                rgbBackground = "transparent";
+                return;
+            }
+
+            rgbOutput = $"{redValue}, {greenValue}, {blueValue}";
+            rgbCssOutput = $"rgb({redValue}, {greenValue}, {blueValue})";
+            rgbBackground = rgbCssOutput;
+        }
+        catch
+        {
+            rgbOutput = string.Empty;
+            rgbCssOutput = string.Empty;
+            rgbBackground = "transparent";
+            return;
+        }
+    }
 }

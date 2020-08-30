@@ -32,8 +32,7 @@ namespace DevTools.UI.Controls
 
         private void DoHashing()
         {
-            var comboBoxItem = cmbHashAlgorithm.SelectedItem as ComboBoxItem;
-            if (comboBoxItem != null && comboBoxItem.Content != null)
+            if (cmbHashAlgorithm.SelectedItem is ComboBoxItem comboBoxItem && comboBoxItem.Content != null)
             {
                 string algorithm = comboBoxItem.Content.ToString();
 

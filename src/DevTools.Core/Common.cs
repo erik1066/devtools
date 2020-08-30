@@ -35,7 +35,7 @@ namespace DevTools
             if (string.IsNullOrEmpty(document)) return "Json document is empty";
             if (string.IsNullOrEmpty(jsonPathExpression)) return "JsonPath expression is empty";
 
-            JObject sourceJson = null;
+            JObject sourceJson;
 
             try
             {
