@@ -4,6 +4,8 @@
 
 [Try it out on the DevTools demo page](https://d365zs3ub4ze90.cloudfront.net/). Or clone this repo and build locally using the cross-platform .NET Core SDK.
 
+> The [demo page](https://d365zs3ub4ze90.cloudfront.net/) is written in Blazor (WebAssembly) which has known performance limitations. Performance will be dramatically improved when Microsoft releases .NET 6 in Nov 2021.
+
 ## Description
 
 Tired of searching for 'RGB to Hex' converters, GUID generators, and other stuff you need in your day-to-day,
