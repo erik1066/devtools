@@ -16,6 +16,20 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Visible;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
+            rgbConverterView.Visibility = Visibility.Collapsed;
+            base64ConverterView.Visibility = Visibility.Collapsed;
+            regexTesterView.Visibility = Visibility.Collapsed;
+            hasherView.Visibility = Visibility.Collapsed;
+            fileEncryptorView.Visibility = Visibility.Collapsed;
+            guidGeneratorView.Visibility = Visibility.Collapsed;
+        }
+
+        private void jsonTransformer_Selected(object sender, RoutedEventArgs e)
+        {
+            if (jsonPathTesterView == null) return;
+            jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Visible;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
@@ -28,6 +42,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Visible;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
@@ -40,6 +55,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Visible;
             regexTesterView.Visibility = Visibility.Collapsed;
@@ -52,6 +68,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Visible;
@@ -64,6 +81,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
@@ -76,6 +94,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;
@@ -88,6 +107,7 @@ namespace DevTools.UI
         {
             if (jsonPathTesterView == null) return;
             jsonPathTesterView.Visibility = Visibility.Collapsed;
+            jsonTransformerView.Visibility = Visibility.Collapsed;
             rgbConverterView.Visibility = Visibility.Collapsed;
             base64ConverterView.Visibility = Visibility.Collapsed;
             regexTesterView.Visibility = Visibility.Collapsed;

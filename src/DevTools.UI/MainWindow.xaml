@@ -27,6 +27,7 @@
             <StackPanel>
                 <ListBox Foreground="#D1D2D3" Background="#19171D">
                     <ListBoxItem Padding="18, 12, 18, 12" x:Name="jsonPath" IsSelected="True" Selected="jsonPath_Selected">JsonPath Tester</ListBoxItem>
+                    <ListBoxItem Padding="18, 12, 18, 12" x:Name="jsonTransformer" Selected="jsonTransformer_Selected">Json Transformer</ListBoxItem>
                     <ListBoxItem Padding="18, 12, 18, 12" x:Name="regexTester" Selected="regexTester_Selected">Regular Expression Tester</ListBoxItem>
                     <ListBoxItem Padding="18, 12, 18, 12" x:Name="rgbConverter" Selected="rgbConverter_Selected">RGB to Hex converter</ListBoxItem>
                     <ListBoxItem Padding="18, 12, 18, 12" x:Name="base64converter" Selected="base64converter_Selected" >Base64 Converter</ListBoxItem>
@@ -40,6 +41,7 @@
         <Border Grid.Column="1" Margin="12">
             <Grid>
                 <controls:JsonPathTester x:Name="jsonPathTesterView" />
+                <controls:JsonTransformer x:Name="jsonTransformerView" Visibility="Collapsed"  DataContext="{Binding JsonTransformerViewModel}" />
                 <controls:RgbToHexConverter x:Name="rgbConverterView" Visibility="Collapsed" />
                 <controls:Base64Converter x:Name="base64ConverterView" Visibility="Collapsed" />
                 <controls:RegexTester x:Name="regexTesterView" Visibility="Collapsed" />
