@@ -1,0 +1,61 @@
+﻿@page "/jsontransformer"
+@using DevTools.WebUI.Models
+@using Newtonsoft.Json.Linq
+
+
+<EditForm Model="@jsonTransformModel" OnValidSubmit="@DoPathTest">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="input">
+                    Input Json:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="input" class="form-control" rows="15" @bind-Value="jsonTransformModel.Input" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="output">
+                    Transform Json:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" id="output" class="form-control" rows="15" @bind-Value="jsonTransformModel.Transform" />
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="form-group">
+                <label for="output">
+                    Output Json:
+                </label>
+                <InputTextArea style="font-family: Consolas, monospace" readonly id="output" class="form-control" rows="15" @bind-Value="jsonTransformModel.Output" />
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 1em;"></div>
+    <button type="submit" class="btn btn-primary mb-2">Test JsonPath expression</button>
+    <div style="height: 1em;"></div>
+</EditForm>
+
+@code {
+
+    JsonTransformModel jsonTransformModel = new JsonTransformModel();
+    private static JUST.JsonTransformer _jsonTransformerObject = new JUST.JsonTransformer();
+
+    private void DoPathTest()
+    {
+        string jsonDocument = jsonTransformModel.Input;
+        string transform = jsonTransformModel.Transform;
+
+        if (string.IsNullOrEmpty(jsonDocument)) return;
+        if (string.IsNullOrEmpty(transform)) return;
+
+        JsonTransformer jsonTransformer = new JsonTransformer();
+
+        jsonTransformModel.Output = _jsonTransformerObject.Transform(transform, jsonDocument);
+    }
+}
